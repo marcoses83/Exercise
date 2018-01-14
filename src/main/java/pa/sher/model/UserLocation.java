@@ -1,27 +1,37 @@
 package pa.sher.model;
 
 public class UserLocation {
-    private User user;
-    private Location location;
+    private String username;
+    private String postalcode;
+    private String city;
 
     public UserLocation(String username, String postalcode, String city) {
-        this.user = new User(username);
-        this.location = new Location(postalcode, city);
+        this.username = username;
+        this.postalcode = postalcode;
+        this.city = city;
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Location getLocation() {
-        return location;
+    public String getPostalcode() {
+        return postalcode;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setPostalcode(String postalcode) {
+        this.postalcode = postalcode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

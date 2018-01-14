@@ -1,6 +1,8 @@
 package pa.sher.data;
 
-import org.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import pa.sher.model.Location;
+import pa.sher.model.User;
 import pa.sher.model.UserLocation;
 
 import java.io.*;
@@ -11,13 +13,25 @@ public class DataRepository implements IDataRepository {
     private final String DB_PATH_DETAIL = "C:/GIT/Sherpa/database/detail.json";
 
     public void SaveUserLocation(UserLocation userLocation) throws IOException {
+        int autonumber = getAutonumber();
+
+        int id = ++autonumber;
+        ObjectMapper mapper = new ObjectMapper();
+        FileWriter masterWriter = new FileWriter(DB_PATH_MASTER, true);
+        mapper.writeValue(masterWriter, new User(id, userLocation.getUsername()));
+        FileWriter detailWriter = new FileWriter(DB_PATH_DETAIL, true);
+        mapper.writeValue(detailWriter, new Location(id, userLocation.getPostalcode(), userLocation.getCity()));
+
+        setAutonumber(autonumber);
+    }
+
+    private int getAutonumber() throws IOException {
         int autonumber = 0;
 
         try {
-            FileReader fileReader = new FileReader(DB_PATH_AUTONUMBER);
-            autonumber = fileReader.read();
-            fileReader.close();
-        } catch (FileNotFoundException e) {
+            String fileContent = readFile(DB_PATH_AUTONUMBER);
+            autonumber = Integer.parseInt(fileContent);
+        } catch (Exception e) {
             try {
                 File file = new File(DB_PATH_AUTONUMBER);
                 file.getParentFile().mkdirs();
@@ -29,27 +43,22 @@ public class DataRepository implements IDataRepository {
                 throw new IOException(e1.getMessage());
             }
         }
+        return autonumber;
+    }
 
-        int id = ++autonumber;
-        JSONObject masterObject = new JSONObject();
-        masterObject.put("id", id);
-        masterObject.put("username", userLocation.getUser().getUsername());
-
-        JSONObject detailObject = new JSONObject();
-        detailObject.put("id", id);
-        detailObject.put("postalcode", userLocation.getLocation().getPostalcode());
-        detailObject.put("city", userLocation.getLocation().getCity());
-
-        FileWriter masterFileWriter = new FileWriter(DB_PATH_MASTER);
-        masterFileWriter.write(masterObject.toString());
-        masterFileWriter.close();
-
-        FileWriter detailFileWriter = new FileWriter(DB_PATH_DETAIL);
-        detailFileWriter.write(detailObject.toString());
-        detailFileWriter.close();
-
+    private void setAutonumber(int autonumber) throws IOException {
         FileWriter fileWriter = new FileWriter(DB_PATH_AUTONUMBER);
         fileWriter.write(String.valueOf(autonumber));
         fileWriter.close();
+    }
+
+    private String readFile(String filename)
+            throws Exception
+    {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
+        String content = bufferedReader.readLine();
+        bufferedReader.close();
+
+        return content;
     }
 }
