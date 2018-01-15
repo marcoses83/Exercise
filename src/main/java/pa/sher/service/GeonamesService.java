@@ -10,9 +10,9 @@ import java.net.URL;
 
 public class GeonamesService {
     private static String username = "marcoses83";
-    private static String countryIdo2 = "ES";
+    private static String countryIso2 = "ES";
 
-    public static String getCity(String postalcode, String countryIso2) {
+    public static String getCity(String postalcode) {
         String city = "";
 
         try {
@@ -20,7 +20,7 @@ public class GeonamesService {
             url.append("http://api.geonames.org/postalCodeSearch?");
             url.append("postalcode=").append(postalcode);
             url.append("&country=").append(countryIso2);
-            url.append("username=").append(username);
+            url.append("&username=").append(username);
 
             String xmlResponse = getApiRequest(url.toString());
             DocumentBuilderFactory docBFactory = DocumentBuilderFactory.newInstance();
@@ -71,8 +71,4 @@ public class GeonamesService {
             urlConnection.disconnect();
         }
     }
-
-    /*public static String getCity(String postalcode) {
-        return "Bilbao";
-    }*/
 }

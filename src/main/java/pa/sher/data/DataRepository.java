@@ -8,9 +8,9 @@ import pa.sher.model.UserLocation;
 import java.io.*;
 
 public class DataRepository implements IDataRepository {
-    private final String DB_PATH_AUTONUMBER = "C:/GIT/Sherpa/database/autonumber";
-    private final String DB_PATH_MASTER = "C:/GIT/Sherpa/database/master.json";
-    private final String DB_PATH_DETAIL = "C:/GIT/Sherpa/database/detail.json";
+    private final String DB_PATH_AUTONUMBER = "C:/Sherpa/database/autonumber";
+    private final String DB_PATH_MASTER = "C:/Sherpa/database/master.json";
+    private final String DB_PATH_DETAIL = "C:/Sherpa/database/detail.json";
 
     public void SaveUserLocation(UserLocation userLocation) throws IOException {
         int autonumber = getAutonumber();
