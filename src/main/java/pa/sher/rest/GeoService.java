@@ -1,7 +1,7 @@
 package pa.sher.rest;
 
-import pa.sher.data.DataRepository;
 import pa.sher.model.UserLocation;
+import pa.sher.service.DataService;
 import pa.sher.service.GeonamesService;
 
 import javax.inject.Inject;
@@ -19,7 +19,7 @@ public class GeoService {
     private GeonamesService geonamesService;
 
     @Inject
-    private DataRepository dataRepository;
+    private DataService dataService;
 
     @GET
     @Path("/{username}/{postalcode}")
@@ -28,7 +28,7 @@ public class GeoService {
         try {
             String city = geonamesService.getCity(postalcode);
             UserLocation uLoc = new UserLocation(username, postalcode, city);
-            dataRepository.saveUserLocation(uLoc);
+            dataService.saveUserLocation(uLoc);
             return Response.status(200).entity(uLoc).build();
         } catch (IOException e) {
             e.printStackTrace();

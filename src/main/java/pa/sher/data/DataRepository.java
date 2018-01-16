@@ -7,7 +7,7 @@ import pa.sher.model.UserLocation;
 
 import java.io.*;
 
-public class DataRepository implements IDataRepository {
+public class DataRepository {
     private final String DB_PATH_AUTONUMBER = "C:/Sherpa/database/autonumber";
     private final String DB_PATH_MASTER = "C:/Sherpa/database/master.json";
     private final String DB_PATH_DETAIL = "C:/Sherpa/database/detail.json";

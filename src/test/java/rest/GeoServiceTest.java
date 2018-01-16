@@ -1,4 +1,4 @@
-package service;
+package rest;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -6,9 +6,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import pa.sher.data.DataRepository;
 import pa.sher.model.UserLocation;
 import pa.sher.rest.GeoService;
+import pa.sher.service.DataService;
 import pa.sher.service.GeonamesService;
 
 import javax.ws.rs.core.Response;
@@ -25,7 +25,7 @@ public class GeoServiceTest {
     GeonamesService geonamesService;
 
     @Mock
-    DataRepository dataRepository;
+    DataService dataService;
 
     @InjectMocks
     private GeoService service;
@@ -54,7 +54,7 @@ public class GeoServiceTest {
 
     @Test
     public void testGetCityWhenErrorOccurs() throws IOException {
-        doThrow(new IOException()).when(dataRepository).saveUserLocation(any());
+        doThrow(new IOException()).when(dataService).saveUserLocation(any());
         Response result = service.getCity("myUsername", "myPostalcode");
 
         Assert.assertEquals(500, result.getStatus());

@@ -3,6 +3,7 @@ package pa.sher.service;
 import org.w3c.dom.Document;
 import pa.sher.helpers.HttpRequestHelper;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,6 +14,9 @@ public class GeonamesService {
     private final String username = "marcoses83";
     private final String countryIso2 = "ES";
 
+    @Inject
+    private HttpRequestHelper httpRequestHelper;
+
     public String getCity(String postalcode) {
         String city = "";
 
@@ -22,7 +26,7 @@ public class GeonamesService {
                     "&country=" + countryIso2 +
                     "&username=" + username;
 
-            Response response = new HttpRequestHelper().get(url);
+            Response response = httpRequestHelper.get(url);
             DocumentBuilderFactory docBFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBFactory.newDocumentBuilder();
             if (response.getStatus() < 300) {
