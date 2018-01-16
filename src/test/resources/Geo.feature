@@ -6,11 +6,12 @@ Feature: Geo
   Scenario Outline: Store user city
     Given "<username>" user name
     And "<postalcode>" postal code
-    When I request the "<city>" city
-    Then the city is returned
-    And information of user location is stored
+    When I request the city
+    Then the request is successful
+    And the city "<city>" is returned
     Examples:
-      |username  |postalcode|city     |
-      |myName1   |48010     |Bilbao   |
-      |myName2   |40300     |Sepúlveda|
-      |myName3   |28080     |Madrid   |
+      |username  |postalcode|city                      |
+      |myName1   |48010     |Bilbao                    |
+      |myName2   |23700     |Vega Santa Maria (Linares)|
+      |myName3   |28080     |Madrid                    |
+      |myName3   |03400     |Villena                   |
