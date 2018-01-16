@@ -10,10 +10,10 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 public class GeonamesService {
-    private static String username = "marcoses83";
-    private static String countryIso2 = "ES";
+    private final String username = "marcoses83";
+    private final String countryIso2 = "ES";
 
-    public static String getCity(String postalcode) {
+    public String getCity(String postalcode) {
         String city = "";
 
         try {

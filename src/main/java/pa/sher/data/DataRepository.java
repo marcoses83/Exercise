@@ -12,7 +12,7 @@ public class DataRepository implements IDataRepository {
     private final String DB_PATH_MASTER = "C:/Sherpa/database/master.json";
     private final String DB_PATH_DETAIL = "C:/Sherpa/database/detail.json";
 
-    public void SaveUserLocation(UserLocation userLocation) throws IOException {
+    public void saveUserLocation(UserLocation userLocation) throws IOException {
         int autonumber = getAutonumber();
 
         int id = ++autonumber;
