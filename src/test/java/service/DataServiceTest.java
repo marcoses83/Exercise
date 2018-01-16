@@ -2,9 +2,11 @@ package service;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import pa.sher.data.DataRepository;
 import pa.sher.model.UserLocation;
 import pa.sher.service.DataService;
@@ -12,10 +14,9 @@ import pa.sher.service.DataService;
 import java.io.IOException;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DataServiceTest {
     @Mock
     DataRepository dataRepository;
