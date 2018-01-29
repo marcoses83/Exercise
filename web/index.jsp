@@ -4,6 +4,6 @@
     <title>Geo</title>
   </head>
   <body>
-    <p>/rest/geo/{username}/{postalcode} to get the city></p>
+    <p>/rest/geo/{username}/{postalcode} to get the city</p>
   </body>
 </html>

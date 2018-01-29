@@ -8,11 +8,11 @@ import pa.sher.model.UserLocation;
 import java.io.*;
 
 public class DataRepository {
-    private final String DB_PATH_AUTONUMBER = "C:/Sherpa/database/autonumber";
-    private final String DB_PATH_MASTER = "C:/Sherpa/database/master.json";
-    private final String DB_PATH_DETAIL = "C:/Sherpa/database/detail.json";
+    private static final String DB_PATH_AUTONUMBER = "C:/Sherpa/database/autonumber";
+    private static final String DB_PATH_MASTER = "C:/Sherpa/database/master.json";
+    private static final String DB_PATH_DETAIL = "C:/Sherpa/database/detail.json";
 
-    public void saveUserLocation(UserLocation userLocation) throws IOException {
+    public synchronized static void saveUserLocation(UserLocation userLocation) throws IOException {
         int autonumber = getAutonumber();
 
         int id = ++autonumber;
@@ -25,7 +25,7 @@ public class DataRepository {
         setAutonumber(autonumber);
     }
 
-    private int getAutonumber() throws IOException {
+    private static int getAutonumber() throws IOException {
         int autonumber = 0;
 
         try {
@@ -46,13 +46,13 @@ public class DataRepository {
         return autonumber;
     }
 
-    private void setAutonumber(int autonumber) throws IOException {
+    private static void setAutonumber(int autonumber) throws IOException {
         FileWriter fileWriter = new FileWriter(DB_PATH_AUTONUMBER);
         fileWriter.write(String.valueOf(autonumber));
         fileWriter.close();
     }
 
-    private String readFile(String filename)
+    private static String readFile(String filename)
             throws Exception
     {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
